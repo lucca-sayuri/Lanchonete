@@ -2,13 +2,10 @@ import { useState } from 'react'
 import './App.css'
 import imgCombo1 from './assets/combo-casal.jpg'
 import imgCombo2 from './assets/combo-2.jpg'
+import Card from './components/Card'
 
 function App() {
   const [tipoCombo, setTipoCombo] = useState('casal')
-
-  const alterarCombo = () => {
-    setTipoCombo(tipoCombo === 'casal' ? 'familia' : 'casal')
-  }
 
   const dadosCombo = {
     casal: {
@@ -25,11 +22,24 @@ function App() {
     }
   }
 
+  const alterarCombo = () => {
+    setTipoCombo(tipoCombo === 'casal' ? 'familia' : 'casal')
+  }
+
+  const dados = dadosCombo[tipoCombo]
+
   return (
     <>
       <div className='container'>
         <h1>Escolha o seu combo</h1>
-        <button>Mudar Combo</button>
+        <button onClick={alterarCombo}>Mudar Combo</button>
+
+        <Card
+          imagem = {dados.imagem}
+          titulo = {dados.titulo}
+          preco = {dados.preco}
+          descricao = {dados.descricao}
+        />
       </div>
     </>
   )
